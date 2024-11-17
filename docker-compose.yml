@@ -1,0 +1,25 @@
+services:
+  dbguardian:
+    image: vindihub/dbguardian
+    volumes:
+      - /host/path/to/backup/folder:/backups
+    networks:
+      - my-app_network # Your app/stack network
+      - uptime-kuma_network # uptime-kuma internal network
+    environment:
+      # - MYSQL_HOST= # MySQL Host
+      # - MYSQL_USER= # MySQL User
+      # - MYSQL_PASSWORD= # MySQL Password
+      # - MYSQL_DATABASE= # MySQL Database Name
+      # - POSTGRES_HOST=joplin-db # Postgres Host
+      # - POSTGRES_USER=${POSTGRES_USER} # Postgres User
+      # - POSTGRES_PASSWORD=${POSTGRES_PASSWORD} # Postgres Password
+      # - POSTGRES_DB=${POSTGRES_DATABASE} # Postgres Database Name
+      - UPTIME_KUMA_PUSH_URL=http://uptime-kuma:3001/api/push/YOUR_URL_PUSH_TOKEN # Push URL from uptime-kuma monitor (Do not include complete URL, just until the token)
+    command: backup-postgres.sh # Select backup-mysql.sh or backup-postgres.sh depending on your needs
+
+networks:
+  my-app_network:
+    external: true
+  uptime-kuma_network:
+    external: true
