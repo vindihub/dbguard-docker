@@ -11,6 +11,7 @@ RUN apk add --no-cache \
     libressl \
     curl \
     bash \
+	dos2unix \
     tzdata \
     && rm -rf /var/cache/apk/*
 
@@ -22,6 +23,7 @@ COPY backup.sh /usr/local/bin/
 
 # Hacer ejecutables los scripts
 RUN chmod +x /usr/local/bin/backup.sh
+RUN dos2unix /usr/local/bin/backup.sh
 
 # Configurar zona horaria por defecto
 ENV TZ=Europe/Madrid
