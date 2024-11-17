@@ -11,7 +11,7 @@ RUN apk add --no-cache \
     libressl \
     curl \
     bash \
-	dos2unix \
+    dos2unix \
     tzdata \
     && rm -rf /var/cache/apk/*
 
